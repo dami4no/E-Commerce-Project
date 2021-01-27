@@ -8,7 +8,7 @@ import asyncHandler from 'express-async-handler'
 // @desc Public
 const getProducts = asyncHandler(async (req, res) => {
     const products = await Product.find({})
-    
+
     res.json(products)
 })
 
@@ -74,7 +74,7 @@ const updateProduct = asyncHandler(async (req, res) => {
             brand,
             category,
             countInStock} = req.body
-    
+
     const product = await Product.findById(req.params.id)
 
     if(product){
@@ -93,7 +93,7 @@ const updateProduct = asyncHandler(async (req, res) => {
         throw new Error('Product not found')
     }
 
-    
+
 })
 
 
@@ -102,11 +102,10 @@ const updateProduct = asyncHandler(async (req, res) => {
 // @desc  Private
 const createProductReview = asyncHandler(async (req, res) => {
     const { rating, comment} = req.body
-    
     const product = await Product.findById(req.params.id)
 
     if(product){
-        const alreadyReviewd = product.reviews.find(r => r.user.toString() === 
+        const alreadyReviewd = product.reviews.find(r => r.user.toString() ===
         req.user._id.toString())
 
         if(alreadyReviewd) {
@@ -135,7 +134,6 @@ const createProductReview = asyncHandler(async (req, res) => {
         throw new Error('Product not found')
     }
 
-    
 })
 
 
